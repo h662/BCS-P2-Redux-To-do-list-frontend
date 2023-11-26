@@ -1,5 +1,10 @@
 import { useDispatch } from "react-redux";
-import { getTodos, toggleDone, updateTodo } from "../redux/appThunk";
+import {
+  deleteTodo,
+  getTodos,
+  toggleDone,
+  updateTodo,
+} from "../redux/appThunk";
 import { useState } from "react";
 
 const TodoCard = ({ index, isDone, title, id }) => {
@@ -17,6 +22,7 @@ const TodoCard = ({ index, isDone, title, id }) => {
   const onClickUpdateToggle = () => {
     setUpdateToggle(!updateToggle);
   };
+
   const onSubmitUpdateTodo = async (e) => {
     e.preventDefault();
 
@@ -27,6 +33,13 @@ const TodoCard = ({ index, isDone, title, id }) => {
     setUpdateToggle(false);
     dispatch(getTodos());
   };
+
+  const onClickDeleteTodo = async () => {
+    await dispatch(deleteTodo({ todoId: id }));
+
+    dispatch(getTodos());
+  };
+
   return (
     <li className={`${index % 2 ? "bg-gray-100" : "bg-white"} w-64 py-1`}>
       <span className="w-1/12 inline-block text-center">{id}</span>
@@ -54,7 +67,12 @@ const TodoCard = ({ index, isDone, title, id }) => {
       >
         {updateToggle ? "취소" : "수정"}
       </button>
-      <button className="w-2/12 hover:font-semibold">삭제</button>
+      <button
+        className="w-2/12 hover:font-semibold"
+        onClick={onClickDeleteTodo}
+      >
+        삭제
+      </button>
     </li>
   );
 };

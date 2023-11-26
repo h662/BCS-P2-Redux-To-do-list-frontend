@@ -53,3 +53,12 @@ export const updateTodo = createAsyncThunk(
     return response.status;
   }
 );
+
+export const deleteTodo = createAsyncThunk(
+  "appSlice/deleteTodo",
+  async ({ todoId }) => {
+    const response = await axios.delete(`${BACK_URL}/todos/${todoId}`);
+
+    return response.status;
+  }
+);

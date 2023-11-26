@@ -9,7 +9,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (todos.length !== 0) return;
+    if (todos) return;
 
     dispatch(getTodos());
   }, [todos, dispatch]);

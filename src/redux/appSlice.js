@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createTodo, getTodos, toggleDone, updateTodo } from "./appThunk";
+import {
+  createTodo,
+  deleteTodo,
+  getTodos,
+  toggleDone,
+  updateTodo,
+} from "./appThunk";
 
 const appSlice = createSlice({
   name: "appSlice",
   initialState: {
-    todos: [],
+    todos: null,
     isLoading: false,
   },
   extraReducers: (builder) => {
@@ -43,6 +49,15 @@ const appSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(updateTodo.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(deleteTodo.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteTodo.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(deleteTodo.rejected, (state) => {
       state.isLoading = false;
     });
   },
