@@ -25,3 +25,20 @@ export const getTodos = createAsyncThunk("appSlice/getTodos", async () => {
 
   return response.data.todos;
 });
+
+export const toggleDone = createAsyncThunk(
+  "appSlice/toggleDone",
+  async (todoId) => {
+    const response = await axios.put(
+      `${BACK_URL}/todos/${todoId}/done`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.status;
+  }
+);

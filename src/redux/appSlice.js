@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createTodo, getTodos } from "./appThunk";
+import { createTodo, getTodos, toggleDone } from "./appThunk";
 
 const appSlice = createSlice({
   name: "appSlice",
@@ -25,6 +25,15 @@ const appSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(getTodos.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(toggleDone.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(toggleDone.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(toggleDone.rejected, (state) => {
       state.isLoading = false;
     });
   },
