@@ -1,5 +1,9 @@
 const App = () => {
-  return <div className="bg-red-100">Hello, React!</div>;
+  return (
+    <div className="min-h-screen flex flex-col items-center py-20">
+      Hello, React!
+    </div>
+  );
 };
 
 export default App;
