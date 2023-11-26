@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createTodo } from "../redux/appThunk";
+import { createTodo, getTodos } from "../redux/appThunk";
 
 const CreateTodo = () => {
   const [newTodo, setNewTodo] = useState("");
@@ -15,6 +15,8 @@ const CreateTodo = () => {
     dispatch(createTodo(newTodo));
 
     setNewTodo("");
+
+    dispatch(getTodos());
   };
 
   return (

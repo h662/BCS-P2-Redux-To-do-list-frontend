@@ -16,6 +16,12 @@ export const createTodo = createAsyncThunk(
       }
     );
 
-    return response.data;
+    return response.status;
   }
 );
+
+export const getTodos = createAsyncThunk("appSlice/getTodos", async () => {
+  const response = await axios.get(`${BACK_URL}/todos`);
+
+  return response.data.todos;
+});
