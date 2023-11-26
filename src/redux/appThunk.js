@@ -5,7 +5,7 @@ const BACK_URL = "http://localhost:3010";
 
 export const createTodo = createAsyncThunk(
   "appSlice/createTodo",
-  async (title) => {
+  async ({ title }) => {
     const response = await axios.post(
       `${BACK_URL}/todos`,
       { title },
@@ -28,10 +28,21 @@ export const getTodos = createAsyncThunk("appSlice/getTodos", async () => {
 
 export const toggleDone = createAsyncThunk(
   "appSlice/toggleDone",
-  async (todoId) => {
+  async ({ todoId }) => {
+    const response = await axios.put(`${BACK_URL}/todos/${todoId}/done`);
+
+    return response.status;
+  }
+);
+
+export const updateTodo = createAsyncThunk(
+  "appSlice/updateTodo",
+  async ({ todoId, title }) => {
     const response = await axios.put(
-      `${BACK_URL}/todos/${todoId}/done`,
-      {},
+      `${BACK_URL}/todos/${todoId}`,
+      {
+        title,
+      },
       {
         headers: {
           "Content-Type": "application/json",

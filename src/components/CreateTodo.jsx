@@ -12,7 +12,7 @@ const CreateTodo = () => {
 
     if (!newTodo) return;
 
-    await dispatch(createTodo(newTodo));
+    await dispatch(createTodo({ title: newTodo }));
 
     setNewTodo("");
 
