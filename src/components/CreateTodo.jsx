@@ -7,12 +7,12 @@ const CreateTodo = () => {
 
   const dispatch = useDispatch();
 
-  const onSumitCreateTodo = (e) => {
+  const onSumitCreateTodo = async (e) => {
     e.preventDefault();
 
     if (!newTodo) return;
 
-    dispatch(createTodo(newTodo));
+    await dispatch(createTodo(newTodo));
 
     setNewTodo("");
 
